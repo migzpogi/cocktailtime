@@ -1,0 +1,30 @@
+stages:
+  - stage: test
+    displayName: "Run Tests"
+    jobs:
+      - job: unit_tests
+        displayName: "Run Unit Tests"
+        pool:
+          vmImage: "ubuntu-latest"
+        steps:
+          - task: UsePythonVersion@0
+            inputs:
+              versionSpec: "3.8"
+            displayName: "Use Python 3.8"
+          - script: |
+              pwd
+  - stage: build
+    displayName: "Build wheel file"
+    dependsOn:
+      - test
+    condition: succeeded()
+    jobs:
+      - job: build_wheel
+        displayName: "Build wheel file"
+        pool:
+          vmImage: "ubuntu-latest"
+        steps:
+          - task: UsePythonVersion@0
+            inputs:
+              versionSpec: "3.x"
+            displayName: "Use Python 3.x"
