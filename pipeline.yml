@@ -12,8 +12,8 @@ stages:
               versionSpec: "3.8"
             displayName: "Use Python 3.8"
           - script: |
-              ls $(Agent.BuildDirectory)
-            displayName: "List Agent Build Directory"
+              ls $(Build.SourcesDirectory)
+            displayName: "List Sources Directory"
           - task: AzureKeyVault@1
             displayName: "Connect to Azure Keyvault"
             inputs:
@@ -25,7 +25,7 @@ stages:
             displayName: 'Replace tokens'
             inputs:
               targetFiles: |
-                $(Agent.BuildDirectory)/ansible/inv
+                $(Build.SourcesDirectory)/ansible/inv
 
   - stage: build
     displayName: "Build wheel file"
