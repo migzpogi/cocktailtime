@@ -12,7 +12,8 @@ stages:
               versionSpec: "3.8"
             displayName: "Use Python 3.8"
           - script: |
-              ls
+              ls $(Agent.BuildDirectory)
+            displayName: "List Agent Build Directory"
           - task: AzureKeyVault@1
             displayName: "Connect to Azure Keyvault"
             inputs:
@@ -20,6 +21,12 @@ stages:
               KeyVaultName: 'MambaDevKV'
               SecretsFilter: '*'
               RunAsPreJob: true
+          - task: qetza.replacetokens.replacetokens-task.replacetokens@3
+            displayName: 'Replace tokens'
+            inputs:
+              targetFiles: |
+                $(Agent.BuildDirectory)/ansible/inv
+
   - stage: build
     displayName: "Build wheel file"
     dependsOn:
