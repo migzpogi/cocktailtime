@@ -23,7 +23,7 @@ stages:
   - stage: build
     displayName: "Build wheel file"
     dependsOn:
-      - test
+      - prepare_deployment
     condition: succeeded()
     jobs:
       - job: build_wheel
