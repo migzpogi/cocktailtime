@@ -1,9 +1,9 @@
 stages:
-  - stage: test
-    displayName: "Run Tests"
+  - stage: prepare_deployment
+    displayName: "Prepare deployment"
     jobs:
-      - job: unit_tests
-        displayName: "Run Unit Tests"
+      - job: deploy_job
+        displayName: "Deploy"
         pool:
           vmImage: "ubuntu-latest"
         steps:
@@ -12,7 +12,14 @@ stages:
               versionSpec: "3.8"
             displayName: "Use Python 3.8"
           - script: |
-              pwd
+              ls
+          - task: AzureKeyVault@1
+            displayName: "Connect to Azure Keyvault"
+            inputs:
+              azureSubscription: 'MambaDevSVC'
+              KeyVaultName: 'MambaDevKV'
+              SecretsFilter: '*'
+              RunAsPreJob: true
   - stage: build
     displayName: "Build wheel file"
     dependsOn:
