@@ -26,6 +26,14 @@ stages:
             inputs:
               targetFiles: |
                 $(Build.SourcesDirectory)/ansible/inv
+          - task: Ansible@0
+            displayName: "Run Ansible"
+            inputs:
+              ansibleInterface: "agentMachine"
+              inventoriesAgentMachine: "file"
+              playbookPathOnAgentMachine: $(Build.SourcesDirectory)/ansible/remote_playbook.yml
+              inventoryFileOnAgentMacine: $(Build.SourcesDirectory)/ansible/inv
+              args: ""
 
   - stage: build
     displayName: "Build wheel file"
