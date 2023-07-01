@@ -31,7 +31,7 @@ stages:
             displayName: "Prepare Ansible"
             inputs:
               ansibleConfigFilePath: $(Build.SourcesDirectory)/ansible/
-              
+
           - task: Ansible@0
             displayName: "Run Ansible"
             inputs:
