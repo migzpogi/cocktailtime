@@ -1,1 +1,2 @@
-#{server-django-ap-south}#
+[dev]
+django_ap_south ansible_host=#{server-django-ap-south}# ansible_user=#{server-django-ap-south-user}# ansible_ssh_pass=#{server-django-ap-south-pass}#
