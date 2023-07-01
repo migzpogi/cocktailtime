@@ -1,0 +1,10 @@
+---
+- hosts: dev
+
+  tasks:
+
+  - name: "Display pwd"
+    shell: "pwd"
+    register: "output"
+
+  - debug: var=output.stdout_lines
