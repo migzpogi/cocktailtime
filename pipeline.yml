@@ -32,7 +32,7 @@ stages:
               ansibleInterface: "agentMachine"
               inventoriesAgentMachine: "file"
               playbookPathOnAgentMachine: $(Build.SourcesDirectory)/ansible/remote_playbook.yml
-              inventoryFileOnAgentMacine: $(Build.SourcesDirectory)/ansible/inv
+              inventoryFileOnAgentMachine: $(Build.SourcesDirectory)/ansible/inv
               args: ""
 
   - stage: build
