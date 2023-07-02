@@ -4,16 +4,16 @@ stages:
     jobs:
       - job: deploy_job
         displayName: "Deploy"
+        variables:
+          ansible_inventory_file: $(Build.SourcesDirectory)/ansible/inv
+          ansible_playbook_file: $(Build.SourcesDirectory)/ansible/remote_playbook.yml
         pool:
           vmImage: "ubuntu-latest"
         steps:
-          - task: UsePythonVersion@0
-            inputs:
-              versionSpec: "3.8"
-            displayName: "Use Python 3.8"
           - script: |
               ls $(Build.SourcesDirectory)
             displayName: "List Sources Directory"
+
           - task: AzureKeyVault@1
             displayName: "Connect to Azure Keyvault"
             inputs:
@@ -21,19 +21,20 @@ stages:
               KeyVaultName: 'MambaDevKV'
               SecretsFilter: '*'
               RunAsPreJob: true
+              
           - task: qetza.replacetokens.replacetokens-task.replacetokens@3
             displayName: 'Replace tokens'
             inputs:
               targetFiles: |
-                $(Build.SourcesDirectory)/ansible/inv
+                $(ansible_inventory_file)
 
           - task: Ansible@0
             displayName: "Run Ansible"
             inputs:
               ansibleInterface: "agentMachine"
               inventoriesAgentMachine: "file"
-              playbookPathOnAgentMachine: $(Build.SourcesDirectory)/ansible/remote_playbook.yml
-              inventoryFileOnAgentMachine: $(Build.SourcesDirectory)/ansible/inv
+              playbookPathOnAgentMachine: $(ansible_playbook_file)
+              inventoryFileOnAgentMachine: $(ansible_inventory_file)
               args: ""
 
   - stage: build
