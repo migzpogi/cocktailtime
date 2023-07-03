@@ -1,6 +1,11 @@
 ---
 - hosts: dev
 
+  pre_tasks:
+    - name: Include vars
+      include_vars:
+        ansible/default_vars.yml
+
   tasks:
 
   - name: "Display pwd"
@@ -8,3 +13,6 @@
     register: "output"
 
   - debug: var=output.stdout_lines
+
+  - debug: msg={{ ProjectRoot }}
+    name: "Show project root"

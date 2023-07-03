@@ -21,7 +21,7 @@ stages:
               KeyVaultName: 'MambaDevKV'
               SecretsFilter: '*'
               RunAsPreJob: true
-              
+
           - task: qetza.replacetokens.replacetokens-task.replacetokens@3
             displayName: 'Replace tokens'
             inputs:
