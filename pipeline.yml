@@ -5,11 +5,20 @@ stages:
       - job: deploy_job
         displayName: "Deploy"
         variables:
-          ansible_inventory_file: $(Build.SourcesDirectory)/ansible/inv
-          ansible_playbook_file: $(Build.SourcesDirectory)/ansible/remote_playbook.yml
+          ansible_root_folder: $(Build.SourcesDirectory)/ansible
+          ansible_inventory_file: $(ansible_root_folder)/inv
+          ansible_playbook_file: $(ansible_root_folder)/playbooks/remote_playbook.yml
         pool:
           vmImage: "ubuntu-latest"
         steps:
+          - script: |
+              sudo apt-get install tree
+            displayName: "Install tree"
+
+          - script: |
+              tree $(Build.SourcesDirectory)
+            displayName: "List tree Build.SourcesDirectory"
+            
           - script: |
               ls $(Build.SourcesDirectory)
             displayName: "List Sources Directory"
