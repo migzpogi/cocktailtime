@@ -18,10 +18,6 @@ stages:
           - script: |
               tree $(Build.SourcesDirectory)
             displayName: "List tree Build.SourcesDirectory"
-            
-          - script: |
-              ls $(Build.SourcesDirectory)
-            displayName: "List Sources Directory"
 
           - task: AzureKeyVault@1
             displayName: "Connect to Azure Keyvault"
