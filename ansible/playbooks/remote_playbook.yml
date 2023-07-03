@@ -8,11 +8,11 @@
 
   tasks:
 
-  - name: "Display pwd"
-    shell: "pwd"
-    register: "output"
+  - name: "Generate random string for directory"
+    shell: "echo $RANDOM"
+    register: "_rand"
 
-  - debug: var=output.stdout_lines
+  - debug: msg={{ ProjectRoot }}/_rand.stdout_lines
 
   - debug: msg={{ ProjectRoot }}
     name: "Show project root"
