@@ -2,5 +2,5 @@
   tempfile:
     state: directory
     prefix: staging
-    path: /projects/cocktailtime
+    path: /home/devuser/projects/cocktailtime
   register: staging_dir
