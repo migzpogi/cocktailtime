@@ -16,3 +16,9 @@
 
   - debug: msg={{ ProjectRoot }}
     name: "Show project root"
+
+  - name: "Generatex "
+    shell: "echo hello"
+    register: "_x"
+
+  - debug: msg={{ ProjectRoot }}/{{ _x }}
