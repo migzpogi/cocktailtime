@@ -13,4 +13,4 @@
 
   - name: Create temp staging directory
     import_role:
-      name: role-create-tmp
+      name: ../roles/role-create-tmp
