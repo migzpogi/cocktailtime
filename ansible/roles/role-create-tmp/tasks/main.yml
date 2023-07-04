@@ -1,0 +1,6 @@
+- name: Create temporary staging directory
+  tempfile:
+    state: directory
+    prefix: staging
+    path: /projects/cocktailtime
+  register: staging_dir

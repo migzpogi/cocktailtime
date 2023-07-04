@@ -8,17 +8,9 @@
 
   tasks:
 
-  - name: "Generate random string for directory"
-    shell: "echo $RANDOM"
-    register: "_rand"
-
-  - debug: msg={{ ProjectRoot }}/{{ _rand }}
-
   - debug: msg={{ ProjectRoot }}
     name: "Show project root"
 
-  - name: "Generatex "
-    shell: "echo hello"
-    register: "_x"
-
-  - debug: msg={{ ProjectRoot }}/{{ _x }}
+  - name: Create temp staging directory
+    import_role:
+      name: role-create-tmp
