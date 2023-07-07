@@ -1,3 +1,6 @@
+trigger:
+- none
+-
 stages:
   - stage: prepare_deployment
     displayName: "Prepare deployment"
@@ -9,7 +12,7 @@ stages:
           ansible_root_folder: $(project_root_folder)/ansible
           ansible_inventory_file: $(ansible_root_folder)/inv
           ansible_playbook_file: $(ansible_root_folder)/playbooks/remote_playbook.yml
-          artifacts_to_be_deployed: $(project_root_folder)/artifact.tar.gz
+          artifacts_to_be_deployed: $(Build.ArtifactStagingDirectory)/artifact.tar.gz
         pool:
           vmImage: "ubuntu-latest"
         steps:
@@ -38,6 +41,7 @@ stages:
           - task: ArchiveFiles@2
             inputs:
               rootFolderOrFile: $(project_root_folder)
+              includeRootFolder: false
               archiveType: 'tar'
               tarCompression: 'gz'
               archiveFile: $(artifacts_to_be_deployed)
