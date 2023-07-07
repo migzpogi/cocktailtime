@@ -8,9 +8,16 @@
 
   tasks:
 
-  - debug: msg={{ ProjectRoot }}
-    name: "Show project root"
-
   - name: Create temp staging directory
     import_role:
       name: ../roles/role-create-tmp
+
+  - debug: msg={{ staging_dir.path }}
+    name: "Temporary staging directory path"
+
+  always:
+
+  - name: Clean temp staging directory
+    file:
+      state: absent
+      path: {{ staging_dir.path }}
