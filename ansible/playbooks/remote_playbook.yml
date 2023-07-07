@@ -17,7 +17,12 @@
        name: "Temporary staging directory path"
 
      - debug: msg={{ artifacts_to_be_deployed }}
-       name: "Artifacts"
+       name: "Artifacts to be deployed"
+
+     - name: Push artifacts
+       import_role:
+         name: ../roles/role-push-artifacts
+
 
 #    always:
 #
