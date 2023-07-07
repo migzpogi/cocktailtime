@@ -21,4 +21,4 @@
     - name: Clean temp staging directory
       file:
         state: absent
-        path: {{ staging_dir.path }}
+        path: "{{ staging_dir.path }}"
