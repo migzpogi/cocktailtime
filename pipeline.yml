@@ -9,7 +9,7 @@ stages:
           ansible_root_folder: $(project_root_folder)/ansible
           ansible_inventory_file: $(ansible_root_folder)/inv
           ansible_playbook_file: $(ansible_root_folder)/playbooks/remote_playbook.yml
-          artifacts_to_be_deployed: $(Build.ArtifactStagingDirectory)/artifact.tar.gz
+          artifacts_to_be_deployed: $(project_root_folder)/artifact.tar.gz
         pool:
           vmImage: "ubuntu-latest"
         steps:
