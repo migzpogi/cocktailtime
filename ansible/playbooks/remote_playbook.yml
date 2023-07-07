@@ -7,14 +7,14 @@
         ../vars/default_vars.yml
 
   tasks:
-    block:
+  - block:
 
-    - name: Create temp staging directory
-      import_role:
-        name: ../roles/role-create-tmp
+     - name: Create temp staging directory
+       import_role:
+         name: ../roles/role-create-tmp
 
-    - debug: msg={{ staging_dir.path }}
-      name: "Temporary staging directory path"
+     - debug: msg={{ staging_dir.path }}
+       name: "Temporary staging directory path"
 
     always:
 
