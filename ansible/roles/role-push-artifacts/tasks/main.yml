@@ -1,0 +1,5 @@
+- name: Extract artifacts to server
+  unarchive:
+    src: "{{ artifacts_to_be_deployed }}"
+    dest: "{{ staging_dir.path }}"
+    remote_src: no
