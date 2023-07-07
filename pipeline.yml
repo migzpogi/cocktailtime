@@ -39,7 +39,7 @@ stages:
             inputs:
               rootFolderOrFile: $(project_root_folder)
               archiveType: 'tar'
-              tarCompression: 'gz''
+              tarCompression: 'gz'
               archiveFile: $(artifacts_to_be_deployed)
 
           - task: Ansible@0
