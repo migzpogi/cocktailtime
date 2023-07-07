@@ -5,9 +5,11 @@ stages:
       - job: deploy_job
         displayName: "Deploy"
         variables:
-          ansible_root_folder: $(Build.SourcesDirectory)/ansible
+          project_root_folder: $(Build.SourcesDirectory)
+          ansible_root_folder: $(project_root_folder)/ansible
           ansible_inventory_file: $(ansible_root_folder)/inv
           ansible_playbook_file: $(ansible_root_folder)/playbooks/remote_playbook.yml
+          artifacts_to_be_deployed: $(Build.ArtifactStagingDirectory)/artifact.tar.gz
         pool:
           vmImage: "ubuntu-latest"
         steps:
@@ -33,6 +35,13 @@ stages:
               targetFiles: |
                 $(ansible_inventory_file)
 
+          - task: ArchiveFiles@2
+            inputs:
+              rootFolderOrFile: $(project_root_folder)
+              archiveType: 'tar'
+              tarCompression: 'gz''
+              archiveFile: $(artifacts_to_be_deployed)
+
           - task: Ansible@0
             displayName: "Run Ansible"
             inputs:
@@ -40,7 +49,7 @@ stages:
               inventoriesAgentMachine: "file"
               playbookPathOnAgentMachine: $(ansible_playbook_file)
               inventoryFileOnAgentMachine: $(ansible_inventory_file)
-              args: ""
+              args: "-e '{ \"artifacts_to_be_deployed\": \"$(artifacts_to_be_deployed)\" }'"
 
   - stage: build
     displayName: "Build wheel file"

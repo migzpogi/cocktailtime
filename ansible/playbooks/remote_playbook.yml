@@ -16,9 +16,12 @@
      - debug: msg={{ staging_dir.path }}
        name: "Temporary staging directory path"
 
-    always:
+     - debug: msg={{ artifacts_to_be_deployed }}
+       name: "Artifacts"
 
-    - name: Clean temp staging directory
-      file:
-        state: absent
-        path: "{{ staging_dir.path }}"
+#    always:
+#
+#    - name: Clean temp staging directory
+#      file:
+#        state: absent
+#        path: "{{ staging_dir.path }}"
