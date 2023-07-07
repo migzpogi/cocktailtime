@@ -49,7 +49,8 @@ stages:
               inventoriesAgentMachine: "file"
               playbookPathOnAgentMachine: $(ansible_playbook_file)
               inventoryFileOnAgentMachine: $(ansible_inventory_file)
-              args: "-e '{ \"artifacts_to_be_deployed\": \"$(artifacts_to_be_deployed)\" }'"
+              args: '-e "artifacts_to_be_deployed=$(artifacts_to_be_deployed)"'
+
 
   - stage: build
     displayName: "Build wheel file"
