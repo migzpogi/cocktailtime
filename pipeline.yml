@@ -1,6 +1,6 @@
 trigger:
 - none
--
+
 stages:
   - stage: prepare_deployment
     displayName: "Prepare deployment"
