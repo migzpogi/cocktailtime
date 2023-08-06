@@ -8,3 +8,8 @@ def sum_func(a, b):
     """
 
     return a+b
+
+
+def easy_time(yyyy_mm_dd):
+    rfc3399 = f"{yyyy_mm_dd}T00:00:00+0000"
+    return rfc3399
