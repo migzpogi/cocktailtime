@@ -52,5 +52,8 @@ Some notes about the files and directories found in the repository
 * `WebApp.py`: main Flask application
 * `requirements.txt`: all the required Python modules 
 
+## Running Tests
+Run `pytest` on project directory path
+
 # Footnotes
 * [tree.nathanfriend.io](https://tree.nathanfriend.io/)
