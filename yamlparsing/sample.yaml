@@ -1,0 +1,24 @@
+name: pipeline_yaml_name
+
+resources:
+  repositories:
+    - repository: SampleRepo
+      type: git
+      name: Sample/Repo/Name
+      ref: refs/heads/master
+
+trigger:
+- none
+
+parameters:
+  - name: Debug
+    displayName: System Debug
+    type: boolean
+    default: false
+
+extends:
+  template: /templates/base/base.yml@SampleRepo
+  parameters:
+    ArtifactName: some_artifact
+    BuildSteps:
+    - template: /templates/build/built.yaml@SampleRepo
