@@ -37,18 +37,47 @@ class Stations(object):
                 return(i)
 
 
-api_key = 'some-random-key'
+api_key = '0b5f530464684a33a9ffc0594b3a5bcd'
 headers = {'Ocp-Apim-Subscription-Key': '{key}'.format(key=api_key)}
 
 
-def get_stations():
+def flask_landing():
+    return "nsinfo landing"
 
-    limit = 1
-    url = f"https://gateway.apiportal.ns.nl/reisinformatie-api/api/v2/stations?countryCodes=nl&limit={limit}"
+
+def get_stations():
+    url = f"https://gateway.apiportal.ns.nl/reisinformatie-api/api/v2/stations?countryCodes=nl"
     stations = Stations(requests.get(url, headers=headers).json())
     print(stations.find_station_by_name("Bloemendaal"))
     print(stations.find_station_by_name("Amsterdam Centraal"))
+    print(stations.find_station_by_name("Zandvoort aan Zee"))
 
 
+def get_trips(from_uic, to_uic):
+    url = f"https://gateway.apiportal.ns.nl/reisinformatie-api/api/v3/trips?originUicCode=8400058&destinationUicCode=8400733&originWalk=false&originBike=false&originCar=false&destinationWalk=false&destinationBike=false&destinationCar=false&dateTime=2023-08-01T16:00:00%2B0200&shorterChange=false&travelAssistance=false&searchForAccessibleTrip=false&localTrainsOnly=false&excludeHighSpeedTrains=false&excludeTrainsWithReservationRequired=false&product=GEEN&discount=NO_DISCOUNT&travelClass=2&passing=false&travelRequestType=DEFAULT"
+    r = requests.get(url, headers=headers)
+    print(r.json())
 
-get_stations()
+
+def get_departures(uic_from):
+    url = f"https://gateway.apiportal.ns.nl/reisinformatie-api/api/v2/departures?uicCode={uic_from}&dateTime=2023-08-01T16:00:00%2B0200"
+    # url = f"https://gateway.apiportal.ns.nl/reisinformatie-api/api/v2/departures?uicCode={uic_from}&dateTime=2023-08-01T00:00:00+0000"
+    r = requests.get(url, headers=headers)
+    print(r.json())
+
+
+# 8400118 Bloemendaal
+# 8400058 Amsterdam Centraal
+# 8400733 Zandvoort aan Zee
+
+
+# get_stations()
+# get_trips('8400058', '8400733')
+# get_departures(8400118)
+
+
+def scrape():
+    r = requests.get("https://www.rijdendetreinen.nl/en/train-archive/2023-08-01/5469")
+    print(r.text)
+
+scrape()
